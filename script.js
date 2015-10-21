@@ -1,77 +1,64 @@
+var appleFruit = {name: 'apple', price: 0};
+var orangeFruit = {name: 'orange', price: 0};
+var bananaFruit = {name: 'banana', price: 0};
+// var grapesFruit = {name: 'Grapes', price: 0, quantity: 0};
+var pearsFruit = {name: 'pear', price: 0};
+var wallet = 100;
+var appleBought = {name: 'apple', quantity: 0};
+var orangeBought = {name: 'orange', quantity: 0};
+var bananaBought = {name: 'banana', quantity: 0};
+var pearsBought = {name: 'pear', quantity: 0};
+var fruitBasket = [appleBought, orangeBought, bananaBought, pearsBought];
+var fruitCost = 0;
+var fruitName = '';
+
 $(document).ready( function(){
 	
 	//creating our fruit objects
-	var appleFruit = {name: 'Apple', price: 0, quantity: 0};
-	var orangeFruit = {name: 'Orange', price: 0, quentity: 0};
-	var bananaFruit = {name: 'Banana', price: 0, quantity: 0};
-	// var grapesFruit = {name: 'Grapes', price: 0, quantity: 0};
-	var pearsFruit = {name: 'Pear', price: 0, quantity: 0};
+	
 	
 	appleFruit.price =  initialSetPrice();
 	orangeFruit.price = initialSetPrice();
 	bananaFruit.price = initialSetPrice();
 	// grapesFruit.price = initialSetPrice();
 	pearsFruit.price = initialSetPrice();
-var fruitArray = [appleFruit, orangeFruit, bananaFruit, pearsFruit];
-
-for (var i = 0; i<fruitArray.length; i++){
-		
-		console.log("This is the price for: " + fruitArray[i].name + " " + upOrDown(fruitArray[i]));
-		//$('#fruits').children().remove();
+	var fruitArray = [appleFruit, orangeFruit, bananaFruit, pearsFruit];
+	//initialization loop to establish the starting fruit prices
+	for (i = 0; i<fruitArray.length; i++){
 		divName = fruitArray[i].name;
 		$('#fruits').append('<div class='+divName+'></div>');
 		var $el = $('#fruits').children().last();
 		$el.append('<p>Fruit: ' + fruitArray[i].name + '</p>');
 		$el.append('<p>Price: ' + fruitArray[i].price + '</p>');
+		$el.append('<button class="buyit">Buy It</button>');
+		$('.'+divName).data('name', fruitArray[i].name);
+		$('.'+divName).data('price', fruitArray[i].price);
 		}
 
-	// var fruitPrice = (randomNumber(5, 999)/100);
-	// console.log(fruitPrice);
-	// $('#fruits').append('<div class="apple"></div>');
-	// //putting the apple on the DOM
-	// $('#fruits').append('<div class="apple"></div>');
-	// var $el = $('#fruits').children().last();
-	// $el.append('<p>Fruit: ' + appleFruit.name + '</p>');
-	// $el.append('<p>Price: ' + appleFruit.price + '</p>');
+	//The click listener
+	$('#fruits').on('click', '.buyit', function(){
+	fruitCost = $(this).parent().data('price');
+	//console.log(fruitCost);
+	fruitName = $(this).parent().data('name');
+	//console.log(fruitName);
 
-	// //putting the orange on the DOM
-	// $('#fruits').append('<div class="orange"></div>');
-	// var $el = $('#fruits').children().last();
-	// $el.append('<p>Fruit: ' + orangeFruit.name + '</p>');
-	// $el.append('<p>Price: ' + orangeFruit.price + '</p>');
+	});
 
-	// //putting the banana on the DOM
-	// $('#fruits').append('<div class="banana"></div>');
-	// var $el = $('#fruits').children().last();
-	// $el.append('<p>Fruit: ' + bananaFruit.name + '</p>');
-	// $el.append('<p>Price: ' + bananaFruit.price + '</p>');
-
-	// //putting the grapes on the DOM
-	// // $('#fruits').append('<div class="grapes"></div>');
-	// // var $el = $('#fruits').children().last();
-	// // $el.append('<p>Fruit: ' + grapesFruit.name + '</p>');
-	// // $el.append('<p>Price: ' + grapesFruit.price + '</p>');
-
-	// //putting the pears on the DOM
-	// $('#fruits').append('<div class="pears"></div>');
-	// var $el = $('#fruits').children().last();
-	// $el.append('<p>Fruit: ' + pearsFruit.name + '</p>');
-	// $el.append('<p>Price: ' + pearsFruit.price + '</p>');
-
-//interval function for setting the price refresh
-setInterval(function(){
-	$('#fruits').empty();
-	for (var i = 0; i<fruitArray.length; i++){
-		
-		console.log("This is the price for: " + fruitArray[i].name + " " + upOrDown(fruitArray[i]));
-		//$('#fruits').children().remove();
-		divName = fruitArray[i].name;
-		$('#fruits').append('<div class='+divName+'></div>');
-		var $el = $('#fruits').children().last();
-		$el.append('<p>Fruit: ' + fruitArray[i].name + '</p>');
-		$el.append('<p>Price: ' + fruitArray[i].price + '</p>');
-		}	
- }, 15000);
+	//interval function for setting the price refresh
+	setInterval(function(){
+		$('#fruits').empty();
+		for (i = 0; i<fruitArray.length; i++){
+			upOrDown(fruitArray[i]);
+			divName = fruitArray[i].name;
+			$('#fruits').append('<div class='+divName+'></div>');
+			var $el = $('#fruits').children().last();
+			$el.append('<p>Fruit: ' + fruitArray[i].name + '</p>');
+			$el.append('<p>Price: ' + fruitArray[i].price + '</p>');
+			$el.append('<button class= "buyit">Buy It</button>');
+			$('.'+divName).data('name', fruitArray[i].name);
+			$('.'+divName).data('price', fruitArray[i].price);	
+			}	
+	 }, 7000);
 
 
 });
@@ -119,7 +106,17 @@ function priceSubtract(object){
 	return object.price;
 }
 
+function buyFruit (object) {
+	if (object.price < wallet){
+		getFruit();
+	} else {
+		alert ("Yo! Not enough dough fool! Only $" + wallet + " remaining");
+	}
+}
 
+function getFruit () {
+	for (var i = 0; i < )
+}
 
 
 
